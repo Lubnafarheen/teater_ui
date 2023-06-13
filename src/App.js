@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Sidebar from './components/Sidebar';
+import Feed from './components/Feed';
+import Rightbar from './components/Rightbar';
+import { Box, Stack } from '@mui/material';
+import NavBar from './components/NavBar';
+import Footer from './components/Footer';
+import Calendar from './components/Calendar';
+import CalendarNavbar from './components/CalendarNavbar';
+import StaffCalendar from './components/StaffCalendar';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+
+
+const App = () => {
+    return (
+        <Box>
+            <CalendarNavbar />
+            <Stack direction="row" spacing={2} justifyContent="space-between">
+                
+        <StaffCalendar />
+            </Stack>
+            <Footer/>
+        </Box>
+    );
+};
 
 export default App;

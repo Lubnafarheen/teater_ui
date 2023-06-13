@@ -1,0 +1,23 @@
+#root {
+max-width: 1280px;
+margin: 0 auto;
+padding: 2rem;
+text-align: left;
+}
+
+.css-1hbyad5-MuiTypography-root {
+    display: none;
+}
+.css-jhsfre-MuiGrid-root-MuiPickersToolbar-content{
+    justify-content: left;
+    background-color:  #b90e0a;
+    color:#fff;
+    padding: 1rem;
+}
+.css-4pax7l-MuiPickersLayout-root .MuiPickersLayout-actionBar{
+    display: none;
+}
+
+.css-1jsy6pn-MuiButtonBase-root-MuiPickersDay-root.Mui-selected{
+    background-color: #b90e0a;
+}
