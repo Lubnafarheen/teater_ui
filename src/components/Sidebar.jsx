@@ -23,7 +23,7 @@ const Sidebar = () => {
       <Box flex={1} p={2} sx={{ display: { xs: "none", sm: "block" } }}>
         <List>
           <ListItem disablePadding>
-            <ListItemButton component="a" href="#home">
+            <ListItemButton component="a" href="/hem">
               <ListItemIcon>
                 <HomeIcon />
               </ListItemIcon>
@@ -31,7 +31,7 @@ const Sidebar = () => {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton component="a" href="#inbox">
+            <ListItemButton component="a" href="#notifications">
               <ListItemIcon>
                 <InboxIcon />
               </ListItemIcon>
