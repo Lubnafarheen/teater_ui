@@ -14,15 +14,54 @@ import {
   TableRow,
   Button,
   Stack,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
 } from "@mui/material";
 import Badge from "@mui/material/Badge";
 import { PickersDay } from "@mui/x-date-pickers/PickersDay";
-import AddIcon from "@mui/icons-material/Add";
-import CalendarNavbar from "./CalendarNavbar";
+import EventIcon from "@mui/icons-material/Event";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const StaffCalendar = () => {
   const [value, setValue] = useState(new Date());
   const [highlightedDays, setHighlightedDays] = useState([1, 2, 5, 15]);
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [title, setTitle] = useState("");
+  const [attendees, setAttendees] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+  const [message, setMessage] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [events, setEvents] = useState([]);
+
+  const handleFormOpen = () => {
+    setIsFormOpen(true);
+  };
+
+  const handleFormClose = () => {
+    setIsFormOpen(false);
+  };
+
+  const handleFormSubmit = () => {
+    const newEvent = {
+      startTime,
+      endTime,
+      title,
+      attendees,
+      message,
+    };
+
+    setTitle("");
+    setAttendees("");
+    setStartTime("");
+    setEndTime("");
+    setMessage("");
+    setEvents([...events, newEvent]);
+    setIsSubmitted(true);
+    setIsFormOpen(false);
+  };
 
   const times = [
     "12:00 AM",
@@ -81,6 +120,7 @@ const StaffCalendar = () => {
           <Stack direction="column" spacing={3} alignItems="center">
             <Button
               variant="primary"
+              onClick={handleFormOpen}
               sx={{
                 bgcolor: "#ECF0F1",
                 color: " #b90e0a",
@@ -89,10 +129,93 @@ const StaffCalendar = () => {
                   color: "#ffffff",
                 },
               }}
-              startIcon={<AddIcon />}
+              startIcon={<EventIcon />}
             >
               Add Event
             </Button>
+            {isFormOpen && !isSubmitted && (
+              <Dialog
+                open={isFormOpen}
+                onClose={handleFormClose}
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  marginTop: "20px",
+                  width: "500px",
+                }}
+              >
+                <DialogTitle>Add Event</DialogTitle>
+                <DialogContent>
+                  <TextField
+                    label="Title :"
+                    variant="outlined"
+                    margin="normal"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    sx={{ width: "100%" }}
+                  />
+                  <TextField
+                    label="Attendees :"
+                    variant="outlined"
+                    margin="normal"
+                    value={attendees}
+                    onChange={(e) => setAttendees(e.target.value)}
+                    sx={{ width: "100%" }}
+                  />
+                  <TextField
+                    label="Start Time :"
+                    variant="outlined"
+                    margin="normal"
+                    value={startTime}
+                    onChange={(e) => setStartTime(e.target.value)}
+                    sx={{ width: "100%" }}
+                  />
+
+                  <TextField
+                    label="End Time :"
+                    variant="outlined"
+                    margin="normal"
+                    value={endTime}
+                    onChange={(e) => setEndTime(e.target.value)}
+                    sx={{ width: "100%" }}
+                  />
+                  <TextField
+                    label="Description :"
+                    variant="outlined"
+                    margin="normal"
+                    multiline
+                    rows={4}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    sx={{ width: "100%" }}
+                  />
+                  <DialogActions sx={{ justifyContent: "center" }}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={handleFormSubmit}
+                    >
+                      Save
+                    </Button>
+                  </DialogActions>
+                </DialogContent>
+              </Dialog>
+            )}
+            {isSubmitted && (
+              <div>
+                <Typography variant="h6" align="center" gutterBottom>
+                  event successfully created!
+                </Typography>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  onClick={() => {
+                    setIsFormOpen(false);
+                    setIsSubmitted(false);
+                  }}
+                ></Button>
+              </div>
+            )}
 
             <Button
               variant="primary"
@@ -105,9 +228,9 @@ const StaffCalendar = () => {
                   color: "#ffffff",
                 },
               }}
-              startIcon={<AddIcon />}
+              startIcon={<DeleteIcon />}
             >
-              Add Member
+              Remove Event
             </Button>
           </Stack>
         </div>
@@ -141,7 +264,25 @@ const StaffCalendar = () => {
                         borderBottom: "1px dotted #000",
                       }}
                     >
-                      {/* Add event data here */}
+                      {events.map((event, index) => {
+                        const eventStartTime = event.startTime.substring(0, 5);
+                        if (eventStartTime === time) {
+                          return (
+                            <div key={index}>
+                              <Typography variant="body1">
+                                {event.title}
+                              </Typography>
+                              <Typography variant="body2">
+                                {event.attendees}
+                              </Typography>
+                              <Typography variant="body2">
+                                {event.message}
+                              </Typography>
+                            </div>
+                          );
+                        }
+                        return null;
+                      })}
                     </TableCell>
                   </TableRow>
                 ))}
