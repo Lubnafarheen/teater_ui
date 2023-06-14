@@ -5,23 +5,22 @@ import Rightbar from './components/Rightbar';
 import { Box, Stack } from '@mui/material';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
-import Calendar from './components/Calendar';
-import CalendarNavbar from './components/CalendarNavbar';
-import StaffCalendar from './components/StaffCalendar';
 
 
 
-const App = () => {
+
+const MemberProfile = () => {
     return (
         <Box>
-            <CalendarNavbar />
+            <NavBar />
             <Stack direction="row" spacing={2} justifyContent="space-between">
-                
-        <StaffCalendar />
+            <Sidebar/>
+            <Feed />
+            <Rightbar />
             </Stack>
             <Footer/>
         </Box>
     );
 };
 
-export default App;
+export default MemberProfile;

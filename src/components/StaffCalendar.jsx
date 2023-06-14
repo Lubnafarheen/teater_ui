@@ -29,7 +29,7 @@ const StaffCalendar = () => {
   const [highlightedDays, setHighlightedDays] = useState([1, 2, 5, 15]);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [title, setTitle] = useState("");
-  const [attendees, setAttendees] = useState("");
+  const [email, setEmail] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [message, setMessage] = useState("");
@@ -49,12 +49,12 @@ const StaffCalendar = () => {
       startTime,
       endTime,
       title,
-      attendees,
+      email,
       message,
     };
 
     setTitle("");
-    setAttendees("");
+    setEmail("");
     setStartTime("");
     setEndTime("");
     setMessage("");
@@ -158,8 +158,8 @@ const StaffCalendar = () => {
                     label="Attendees :"
                     variant="outlined"
                     margin="normal"
-                    value={attendees}
-                    onChange={(e) => setAttendees(e.target.value)}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     sx={{ width: "100%" }}
                   />
                   <TextField
